@@ -14,7 +14,6 @@ export const KeyboardCenter = (() => {
             if (!active) {
                 return;
             }
-            debugger
             if (e && (active.ks.inputElement.contains(e.target) || active.ks.keyboardElement.contains(e.target))) {
                 return;
             }
