@@ -5,7 +5,7 @@
   entertext="完成"
   (ngModelChange)="onChange($event)"
 >
-  <button (touchend)="keyboard.openKeyboard()">正数 整数</button>
+  <button (touchend)="keyboard.openKeyboard()"  class="numeric-input">正数 整数</button>
 </z-keyboard>
 
 <z-keyboard
@@ -15,7 +15,7 @@
   entertext="完成"
   (ngModelChange)="onChange($event)"
 >
-  <button (touchend)="keyboard1.openKeyboard()">正数 小数</button>
+  <button (touchend)="keyboard1.openKeyboard()" class="numeric-input">正数 小数</button>
 </z-keyboard>
 
 <z-keyboard
@@ -25,7 +25,7 @@
   entertext="完成"
   (ngModelChange)="onChange($event)"
 >
-  <button (touchend)="keyboard2.openKeyboard()">可负数 整数</button></z-keyboard
+  <button (touchend)="keyboard2.openKeyboard()" class="numeric-input">可负数 整数</button></z-keyboard
 >
 
 <z-keyboard
@@ -34,4 +34,4 @@
   [isNegative]="true"
   entertext="完成"
   (ngModelChange)="onChange($event)"
-><button (touchend)="keyboard3.openKeyboard()">可负数 小数</button></z-keyboard>
+><button (touchend)="keyboard3.openKeyboard()" class="numeric-input">可负数 小数</button></z-keyboard>

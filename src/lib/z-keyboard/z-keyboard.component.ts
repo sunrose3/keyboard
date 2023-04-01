@@ -1,14 +1,15 @@
-import { ApplicationRef, Component, ComponentFactoryResolver, ComponentRef, EmbeddedViewRef, EventEmitter, Injector, Input, OnInit, Output, ViewRef } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, ApplicationRef, Component, ComponentFactoryResolver, ElementRef, EmbeddedViewRef, EventEmitter, Injector, Input, OnDestroy, OnInit, Output, ViewRef } from '@angular/core';
 import { Options, Parent } from '../utils/input';
 import { NumericKeyboardComponent } from './keyboard/keyboard.component';
 import { Layout, LayoutsType } from '../utils/layouts';
+import { ControlValueAccessor } from '@angular/forms';
 
 @Component({
   selector: 'z-keyboard',
   templateUrl: './z-keyboard.component.html',
   styleUrls: ['./z-keyboard.component.scss']
 })
-export class ZKeyboardComponent extends Parent implements OnInit {
+export class ZKeyboardComponent extends Parent implements OnInit, OnDestroy, AfterViewInit, ControlValueAccessor {
 
   @Input() isInteger: boolean = true;//是否为整数
   @Input() isNegative: boolean = false;//是否为负数
@@ -23,12 +24,14 @@ export class ZKeyboardComponent extends Parent implements OnInit {
   _onChange = (_: any) => { };
 
   constructor(
+    private element: ElementRef,
     private appRef: ApplicationRef,
     private componentFactoryResolver: ComponentFactoryResolver,
     private injector: Injector
   ) {
     super();
   }
+
   ngOnInit() {
     if (this.isInteger && this.isNegative) this.layout = "negativeNumber";//整数 为负数
     if (!this.isInteger && this.isNegative) this.layout = "negativeDecimals";//小数为负数
@@ -39,6 +42,9 @@ export class ZKeyboardComponent extends Parent implements OnInit {
       resolvedOptions[key] = this[key];
     }
     this.init.call(this, resolvedOptions);
+  }
+  ngAfterViewInit() {
+    this.onInputElement.call(this, this.element.nativeElement.querySelector('.numeric-input'))
   }
 
   onChange(value: number | string) {

@@ -14,6 +14,7 @@ export const KeyboardCenter = (() => {
             if (!active) {
                 return;
             }
+            debugger
             if (e && (active.ks.inputElement.contains(e.target) || active.ks.keyboardElement.contains(e.target))) {
                 return;
             }
@@ -46,6 +47,7 @@ export class Parent {
         this.ks = {
             rawValue,
             keyboard: null,
+            inputElement: null,
             keyboardElement: null
         };
     }
@@ -55,6 +57,10 @@ export class Parent {
 
     set(key, value) {
         this.ks[key] = value;
+    }
+
+    onInputElement(el: any) {
+        this.set('inputElement', el);
     }
 
     input(key: any) {
