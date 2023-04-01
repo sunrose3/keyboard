@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'keyboard';
+
+  onChange(string: string | number) {
+    console.log(string);
+  }
 }
