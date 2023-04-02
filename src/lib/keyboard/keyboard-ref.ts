@@ -63,8 +63,27 @@ export class KeyboardRef {
       const startPos = input.selectionStart;
       const endPos = input.selectionEnd;
       const oldValue = input.value;
-      input.value = oldValue.substring(0, startPos) + text + oldValue.substring(endPos);
-      input.setSelectionRange(startPos + 1, startPos + 1);
+      if (text == '-/+') {
+        if (parseFloat(oldValue) >= 0 && oldValue.indexOf("-") == -1) {
+          input.value = '-' + oldValue;
+          input.setSelectionRange(startPos + 1, startPos + 1);
+        } else {
+          input.value = oldValue.replace("-", "");
+          input.setSelectionRange(startPos - 1, startPos - 1);
+        }
+      } else {
+        let newValue = oldValue.substring(0, startPos) + text + oldValue.substring(endPos);
+        newValue = this.verification(newValue.split(""), text, startPos);
+        let cursorPos = newValue.length - oldValue.length;
+        if (text == "00") {
+          input.value = newValue;
+          input.setSelectionRange(startPos + cursorPos, startPos + cursorPos);
+        }
+        else {
+          input.value = newValue;
+          input.setSelectionRange(startPos + cursorPos, startPos + cursorPos);
+        }
+      }
     }
   }
 
@@ -80,6 +99,32 @@ export class KeyboardRef {
       input.value = input.value.substring(0, startPos) + input.value.substring(endPos);
       input.setSelectionRange(startPos, startPos);
     }
+  }
+
+  //输入内容校验
+  private verification(newRawValue, inputKey, cursorPos): string {
+    let newValue = newRawValue.join('');
+    let newValueArr = newRawValue;
+    if (!/^-?\d*(?:\.\d*)?$/.test(newValue)) return '';
+    newValue = parseFloat(newValue);
+    newValueArr = newValue.toString().split("");
+    const newValueString = newRawValue.join('');//下面有用的
+    newValueArr = newValueString === "-" || newValueString === "-0"//保留'-'
+      || inputKey === "." || newRawValue[newRawValue.length - 1] === "."//输入为'.' 或者 删除'.'后所有内容('xxx.')
+      || (newValueString.indexOf("0.") != -1 && newValueString.substring(0, 2) === "0.") || (newValueString.indexOf("-0.") != -1) //'0.'或'-0.'
+      ? newRawValue : newValue.toString().split("");
+
+    if (newValue == 0 && (inputKey === "0" || inputKey === "00")) {//值为0 时候 输入多个0
+      if (newValueString.indexOf(".") != -1) {//浮点数
+        if (cursorPos < newValueString.indexOf('.'))
+          newRawValue.splice(cursorPos, 1);
+        newValueArr = newRawValue;
+      } else {//整数
+        newValueArr = (newValueString.indexOf("-") != -1) ? ["-", "0"] : ['0'];
+      }
+    }
+
+    return newValueArr.join('')
   }
 
   private createKeyboard(el, events?: Events, options?: KeyboardOptions): ComponentRef<NumericKeyboardComponent> {

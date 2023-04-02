@@ -10,7 +10,6 @@ export class KeyboardService {
     private componentFactoryResolver: ComponentFactoryResolver,
     private injector: Injector
   ) {}
-
   /**
    * 注册输入框
    * @param input
@@ -18,6 +17,8 @@ export class KeyboardService {
    */
   registerInput(
     input: InputElement,
+    isInteger:boolean,
+    isNegative:boolean,
     options?: KeyboardOptions & {
       /**
        * 是否绑定事件,用来自动触发弹起键盘, false不注册事件, 需要用户自己控制
@@ -29,6 +30,10 @@ export class KeyboardService {
       (input as ElementRef<HTMLInputElement | HTMLTextAreaElement>).nativeElement ||
       (input as HTMLInputElement | HTMLTextAreaElement);
 
+    if (isInteger && isNegative) options.layout = "negativeNumber";//整数 为负数
+    if (!isInteger && isNegative) options.layout = "negativeDecimals";//小数为负数
+    if (isInteger && !isNegative) options.layout = "number";//整数 不为负数
+    if (!isInteger && !isNegative) options.layout = "decimals";//小数 不为负数
     const keyboardRef = new KeyboardRef(input, this.appRef, this.componentFactoryResolver, this.injector);
 
     if (options?.bindEvent !== false) {
