@@ -26,6 +26,7 @@
 <div class="content" role="main">
   <div>
     <textarea
+      readonly
       ngKeyboard
       [isInteger]="true"
       [isNegative]="false"
@@ -38,6 +39,7 @@
 
   <div>
     <input
+      readonly
       ngKeyboard
       [isInteger]="true"
       [isNegative]="false"
@@ -49,23 +51,27 @@
     />
   </div>
   <div class="tip">提示: PC浏览器请切换到仿真设备查看</div>
+  <br><br>
 
-  <!-- <div>
+  <div>
     <p-inputNumber
+      [readonly]="true"
       ngKeyboard
+      inputSelector="input.p-inputtext"
       [isInteger]="true"
       [isNegative]="false"
       [(ngModel)]="value"
       entertext="完成"
-      class="input"
       placeholder="ngKeyboard指令创建 正负小数"
     ></p-inputNumber>
-  </div> -->
+    <br><br>
+  </div>
 
   <div>
     <p-inputNumber
       #input
-      [(ngModel)]="value"
+      [readonly]="true"
+      [(ngModel)]="value0"
       entertext="完成"
       inputId="minmaxfraction"
       mode="decimal"
@@ -73,12 +79,14 @@
       [maxFractionDigits]="5"
       placeholder="ngKeyboard指令创建 正负小数"
     ></p-inputNumber>
+    <br><br>
   </div>
 
 
   <div>
     <p-inputNumber
       #input1
+      [readonly]="true"
       [(ngModel)]="value1"
       entertext="完成"
       inputId="minmaxfraction"
@@ -87,12 +95,14 @@
       [maxFractionDigits]="5"
       placeholder="ngKeyboard指令创建 正负整数"
     ></p-inputNumber>
+    <br><br>
   </div>
 
-  
+
   <div>
     <p-inputNumber
       #input2
+      [readonly]="true"
       [(ngModel)]="value2"
       entertext="完成"
       inputId="minmaxfraction"
@@ -101,12 +111,14 @@
       [maxFractionDigits]="5"
       placeholder="ngKeyboard指令创建 正小数"
     ></p-inputNumber>
+    <br><br>
   </div>
 
-  
+
   <div>
     <p-inputNumber
       #input3
+      [readonly]="true"
       [(ngModel)]="value3"
       entertext="完成"
       inputId="minmaxfraction"
@@ -115,6 +127,7 @@
       [maxFractionDigits]="5"
       placeholder="ngKeyboard指令创建 正整数"
     ></p-inputNumber>
+    <br><br>
   </div>
   <!-- Footer -->
   <footer>
