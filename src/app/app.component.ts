@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
+import { KeyboardService } from 'src/lib/keyboard/keyboard.service';
 
 @Component({
   selector: 'app-root',
@@ -9,25 +10,12 @@ export class AppComponent {
   link = 'https://github.com/sunrose3/keyboard';
   title = 'keyboard';
 
-  value = "";
-  value1 = "";
-  value2 = "";
-  value3 = "";
+  @ViewChild('input', { static: true }) input!: ElementRef<HTMLInputElement>;
+  constructor(private keyboardService: KeyboardService) { }
 
-  onChange(string: string | number) {
-    console.log(string);
-    this.value = this.value+string;
-  }
-  onChange1(string: string | number) {
-    console.log(string);
-    this.value1 += string;
-  }
-  onChange2(string: string | number) {
-    console.log(string);
-    this.value2 += string;
-  }
-  onChange3(string: string | number) {
-    console.log(string);
-    this.value3 += string;
+  ngOnInit(): void {
+    this.keyboardService.registerInput(this.input.nativeElement, {
+      layout: 'number'
+    });
   }
 }
