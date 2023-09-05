@@ -7,7 +7,6 @@ import {
   HostListener,
   Injector,
   Input,
-  OnInit
 } from '@angular/core';
 import { KeyboardRef } from './keyboard-ref';
 import { Layout, LayoutsType } from '../utils/layouts';
