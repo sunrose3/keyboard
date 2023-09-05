@@ -55,6 +55,7 @@ export class KeyboardRef {
         this.insertChar(this._activeInputElement, button);
         break;
     }
+    this._activeInputElement.dispatchEvent(new Event('change'));
   }
 
   private insertChar(input, text: string) {
