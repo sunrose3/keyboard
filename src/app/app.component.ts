@@ -1,5 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { KeyboardService } from 'src/lib/keyboard/keyboard.service';
+import { KeyboardService } from 'projects/zen-keyboard/src/lib/keyboard/keyboard.service';
 
 @Component({
   selector: 'app-root',

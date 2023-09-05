@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { KeyboardModule } from 'src/lib/keyboard/keyboard.module';
+import { KeyboardModule } from 'zen-keyboard';
 
 @NgModule({
   declarations: [
