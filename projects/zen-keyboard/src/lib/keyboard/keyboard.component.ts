@@ -53,6 +53,7 @@ export class NumericKeyboardComponent implements OnInit, OnDestroy {
   }
 
   stopEvent(event: TouchEvent) {
+    
     event.stopPropagation();
     event.preventDefault();
   }

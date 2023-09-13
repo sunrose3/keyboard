@@ -46,6 +46,7 @@ export class KeyboardRef {
         this.closeKeyboard();
         return;
       case Keys.ENTER:
+
         this.closeKeyboard();
         return;
       case Keys.DEL:
@@ -150,7 +151,7 @@ export class KeyboardRef {
     return componentRef;
   }
 
-  openKeyboard(options?: KeyboardOptions) {
+  openKeyboard(options?: KeyboardOptions & { events?: Events }) {
     if (this.keyboard) {
       return;
     }
@@ -168,7 +169,7 @@ export class KeyboardRef {
     let timer$: Subscription | null = null;
     this.keyboard = this.createKeyboard(
       elKeyboard,
-      {
+      Object.assign({
         press: inputHandler,
         longPress: key => {
           if (key === ENTER) {
@@ -186,7 +187,7 @@ export class KeyboardRef {
             timer$ = null;
           }
         }
-      },
+      }, options?.events ?? {}),
       options
     );
 
@@ -227,6 +228,7 @@ export class KeyboardRef {
     this.keyboardElement = null;
   }
 
+
   private destroyKeyboard(el, keyboard) {
     keyboard.destroy();
     this.appRef.detachView(keyboard.hostView);
@@ -265,6 +267,7 @@ export interface Events {
   longPress?(key: string): void;
   longEnterpressEnd?(): void;
   longPressEnd?(key: string): void;
+  clickEnter?(key: string): void;
 }
 
 export type InputElement = HTMLInputElement | HTMLTextAreaElement | ElementRef<HTMLInputElement | HTMLTextAreaElement>;

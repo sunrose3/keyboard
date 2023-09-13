@@ -24,6 +24,18 @@
 </div>
 
 <div class="content" role="main">
+  <div (click)="touch(keyboardRef)">
+    <input
+      #keyboardRef
+      ngKeyboard
+      class="input-field"
+      [isInteger]="false"
+      entertext="完成"
+      (change)="valueChange($event)"
+      (enterClick)="enter($event)"
+    />
+  </div>
+  <button (click)="close(keyboardRef)">guan3232</button>
   <div>
     <textarea
       readonly
@@ -51,7 +63,7 @@
     />
   </div>
   <div class="tip">提示: PC浏览器请切换到仿真设备查看</div>
-  <br><br>
+  <br /><br />
 
   <div>
     <p-inputNumber
@@ -64,7 +76,7 @@
       entertext="完成"
       placeholder="ngKeyboard指令创建 正负小数"
     ></p-inputNumber>
-    <br><br>
+    <br /><br />
   </div>
 
   <div>
@@ -79,9 +91,8 @@
       [maxFractionDigits]="5"
       placeholder="ngKeyboard指令创建 正负小数"
     ></p-inputNumber>
-    <br><br>
+    <br /><br />
   </div>
-
 
   <div>
     <p-inputNumber
@@ -95,9 +106,8 @@
       [maxFractionDigits]="5"
       placeholder="ngKeyboard指令创建 正负整数"
     ></p-inputNumber>
-    <br><br>
+    <br /><br />
   </div>
-
 
   <div>
     <p-inputNumber
@@ -111,9 +121,8 @@
       [maxFractionDigits]="5"
       placeholder="ngKeyboard指令创建 正小数"
     ></p-inputNumber>
-    <br><br>
+    <br /><br />
   </div>
-
 
   <div>
     <p-inputNumber
@@ -127,7 +136,7 @@
       [maxFractionDigits]="5"
       placeholder="ngKeyboard指令创建 正整数"
     ></p-inputNumber>
-    <br><br>
+    <br /><br />
   </div>
   <!-- Footer -->
   <footer>

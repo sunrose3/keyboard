@@ -36,4 +36,21 @@ export class AppComponent {
       layout: 'number'
     });
   }
+  // 输入键盘
+  touch(input: any) { 
+    input.dispatchEvent(new Event('focus'));
+  }
+
+  // 输入值变更
+  valueChange(event: any,) {
+    
+  }
+
+  close(input: any) {
+    input.dispatchEvent(new Event('blur'));
+  }
+
+  enter(event: any){
+    debugger
+  }
 }
